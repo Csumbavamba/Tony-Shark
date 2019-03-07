@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour
     private Camera myCamera;
     private GameObject tony;
     private GameObject shark;
-    private CharacterController characterController;
+    Rigidbody myBody;
 
     public Slider balanceSlider;
 
@@ -38,8 +38,8 @@ public class PlayerControl : MonoBehaviour
     //-----Jump
     private float jumpInput;
     private float jumpPower;
-    private float jumpMax = 90.0f;
-    private float jumpIncrement = 1.0f;
+    private float jumpMax = 15.0f;
+    private float jumpIncrement = 0.1f;
 
 
     void Start()
@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour
         tony = GameObject.Find("/MainCharacter/Player");
         shark = GameObject.Find("/MainCharacter/Shark");
         sharkInitTransform = shark.transform;
-        characterController = this.GetComponent<CharacterController>();
+        myBody = GetComponent<Rigidbody>();
 
         balanceSlider.minValue = -balanceMax;
         balanceSlider.maxValue = balanceMax;
@@ -106,21 +106,20 @@ public class PlayerControl : MonoBehaviour
         horizontalMovment = balance/2;
 
         //vertical
-        if (!characterController.isGrounded) verticalMovement -= 0.8f;
-        else verticalMovement = 0;
 
-        if (Input.GetKey("space") && jumpPower < jumpMax && characterController.isGrounded)
+        if (Input.GetKey("space") && jumpPower < jumpMax)
         {
             jumpPower += jumpIncrement;
             
         }
         if (Input.GetKeyUp("space"))
         {
-            verticalMovement = jumpPower;
+            myBody.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             jumpPower = 0;
         }
 
-
+        //foward
+        fowardMovement = 10.0f;
         
 
         
@@ -130,7 +129,7 @@ public class PlayerControl : MonoBehaviour
         movementVector += Vector3.forward * fowardMovement;
         movementVector += Vector3.up * verticalMovement;
 
-        characterController.Move(movementVector * Time.deltaTime);
+        
 
         //shark
         shark.transform.rotation = sharkInitTransform.rotation;
@@ -141,5 +140,10 @@ public class PlayerControl : MonoBehaviour
         tony.transform.RotateAround(shark.transform.position, shark.transform.up, 0.0f + -balance);
     }
 
-    
+    void FixedUpdate()
+    {
+        myBody.MovePosition(myBody.position + movementVector * Time.deltaTime);
 }
+}
+
+
