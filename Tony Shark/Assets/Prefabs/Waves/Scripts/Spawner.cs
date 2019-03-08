@@ -27,14 +27,14 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnWavesContinuously());
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        StopCoroutine(SpawnWavesContinuously());
-    //        StartCoroutine(SpawnWavesContinuously());
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StopCoroutine(SpawnWavesContinuously());
+            StartCoroutine(SpawnWavesContinuously());
+        }
+    }
 
     Vector3 GetRandomSpawnPosition()
     {
