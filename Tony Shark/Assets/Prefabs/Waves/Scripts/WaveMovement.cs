@@ -12,6 +12,7 @@ public class WaveMovement : MonoBehaviour
     float distanceRaised = 0.0f;
     float distanceLowered = 0.0f;
 
+    // State bools for - TODO consider making it an enum
     bool startedBringingDown = false;
     bool isStopped = false;
     bool reachedMaxHeight = false;
