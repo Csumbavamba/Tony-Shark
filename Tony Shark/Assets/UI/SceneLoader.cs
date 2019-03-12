@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    GameManager gameManager;
+
     private void Awake()
     {
         // Check if this object exists
@@ -20,6 +22,9 @@ public class SceneLoader : MonoBehaviour
         {
             DontDestroyOnLoad(this);
         }
+
+        gameManager = FindObjectOfType<GameManager>();
+
     }
 
     public void LoadMainMenu()
@@ -34,11 +39,17 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("Game"); // TODO Create Scene
+        SceneManager.LoadScene("Game");
+    }
+    
+    public void LoadLoseScene()
+    {
+        SceneManager.LoadScene("Lose Scene");
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
+
 }
