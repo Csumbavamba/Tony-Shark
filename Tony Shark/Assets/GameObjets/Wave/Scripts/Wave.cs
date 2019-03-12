@@ -7,6 +7,7 @@ public class Wave : MonoBehaviour
 {
     WaveMovement movementComponent;
     WaveGrowth growthComponent;
+    Spawner spawner;
 
     [SerializeField] WaveSettings settings;
 
@@ -19,6 +20,8 @@ public class Wave : MonoBehaviour
         movementComponent.SetupMovementSettings(settings.MovementSettings);
 
         growthComponent = gameObject.AddComponent<WaveGrowth>();
+
+        spawner = FindObjectOfType<Spawner>();
     }
 
     // TODO remove once Wave Controller spawns the waves
@@ -39,6 +42,8 @@ public class Wave : MonoBehaviour
         // Destroy object once it is stopped
         if (movementComponent.IsStopped)
         {
+            // Remove from wave list
+            spawner.SpawnedWaves.Remove(gameObject);
             Destroy(gameObject);
         }
 

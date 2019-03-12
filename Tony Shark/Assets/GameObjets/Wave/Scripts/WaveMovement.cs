@@ -2,15 +2,17 @@
 using UnityEngine;
 
 
-
 public class WaveMovement : MonoBehaviour
 {
     WaveMovementSettings movementSettings;
+
+    [SerializeField] float sideMovementSpeed = 5.0f; // MOVE TO SPAWNER
 
     float distanceTravelled = 0.0f;
     float distanceRaised = 0.0f;
     float distanceLowered = 0.0f;
 
+    // State bools for - TODO consider making it an enum
     bool startedBringingDown = false;
     bool isStopped = false;
     bool reachedMaxHeight = false;
@@ -45,6 +47,10 @@ public class WaveMovement : MonoBehaviour
         // Start raising the  wave up
         StopCoroutine(RaiseWaveUp());
         StartCoroutine(RaiseWaveUp());
+
+        // TODO Move Wave sideways
+        StopCoroutine(MoveSideways());
+        StartCoroutine(MoveSideways());
 
         // While the wave did not travelled his maximum travel length
         while (distanceTravelled < movementSettings.TravelDistance)
@@ -115,5 +121,21 @@ public class WaveMovement : MonoBehaviour
 
         reachedMaxHeight = true;
         print("Max height reached");
+    }
+
+    IEnumerator MoveSideways()
+    {
+        while(true)
+        {
+            // Start moving the wave sideway
+            Vector3 sideMovementPosition = transform.forward * sideMovementSpeed * Time.deltaTime; // TODO make this decided by the spawner
+
+            // Move the way sideways
+            transform.Translate(sideMovementPosition);
+
+            yield return null;
+        }
+        
+        
     }
 }
