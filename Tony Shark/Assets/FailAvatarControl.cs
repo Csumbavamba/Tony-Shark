@@ -68,9 +68,9 @@ public class FailAvatarControl : MonoBehaviour
     {
         balance += input.x;
 
-        if (balance > balanceEasyAngle) balance *= balanceEasyAcc;
-        else if (balance > balanceMedAngle) balance *= balanceMedAcc;
-        else if (balance > balanceHardAngle) balance *= balanceHardAcc;
+        if (Mathf.Abs(balance) > Mathf.Abs(balanceEasyAngle)) balance *= balanceEasyAcc;
+        else if (Mathf.Abs(balance) > Mathf.Abs(balanceMedAngle)) balance *= balanceMedAcc;
+        else if (Mathf.Abs(balance) > Mathf.Abs(balanceHardAngle)) balance *= balanceHardAcc;
 
         Mathf.Clamp(balance, -balanceMaxAngle, balanceMaxAngle);
         turnSpeed = Mathf.Abs(balance)/500.0f;
