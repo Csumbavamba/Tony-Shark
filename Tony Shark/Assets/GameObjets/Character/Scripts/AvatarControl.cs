@@ -69,7 +69,6 @@ public class AvatarControl : MonoBehaviour
     private void Update()
     {
         GetInput();
-        DrawLines();
         Balance();
     }
 
@@ -100,8 +99,11 @@ public class AvatarControl : MonoBehaviour
         {
             OnWave();
             MoveHorizontal(1f);
-            if (riding != Riding.NONE) velocity.z += moveSpeed.z * 0.1f;
-            if (Mathf.Abs(velocity.z) > minVelocity.z) Mathf.Lerp(velocity.z, minVelocity.z * Mathf.Sign(velocity.z), 0.125f);
+            if (riding != Riding.NONE) velocity.z += moveSpeed.z * 0.5f;
+            if (Mathf.Abs(velocity.z) > minVelocity.z)
+            {
+                velocity.z = Mathf.Lerp(velocity.z, minVelocity.z * Mathf.Sign(velocity.z), 0.125f);
+            }
             else velocity.z = minVelocity.z;
 
             if (Mathf.Abs(velocity.x) > maxVelocity.x) Mathf.Lerp(velocity.x, maxVelocity.x * Mathf.Sign(velocity.x), 1f);
@@ -179,25 +181,17 @@ public class AvatarControl : MonoBehaviour
 
     void Balance()
     {
+        print(balance);
         balance += input.x;
 
         if (Mathf.Abs(balance) > Mathf.Abs(balanceEasyAngle)) balance *= balanceEasyAcc;
         else if (Mathf.Abs(balance) > Mathf.Abs(balanceMedAngle)) balance *= balanceMedAcc;
         else if (Mathf.Abs(balance) > Mathf.Abs(balanceHardAngle)) balance *= balanceHardAcc;
 
-        Mathf.Clamp(balance, -balanceMaxAngle, balanceMaxAngle);
+        balance = Mathf.Clamp(balance, -balanceMaxAngle, balanceMaxAngle);
         
         turnSpeed = Mathf.Pow(balance / balanceMaxAngle, 2);
 
         balanceSlider.value = balance;
-    }
-
-    void DrawLines()
-    {
-        if (!debug) return;
-
-        Debug.DrawLine(transform.position, transform.position + Vector3.down * snapDistance, Color.red);
-        Debug.DrawLine(transform.position, transform.position + (Vector3.down / 2) + Vector3.right * snapDistance, Color.blue);
-        Debug.DrawLine(transform.position, transform.position + (Vector3.down / 2) - Vector3.right * snapDistance, Color.green);
     }
 }
