@@ -43,7 +43,7 @@ public class Wave : MonoBehaviour
         if (movementComponent.IsStopped)
         {
             // Remove from wave list
-            spawner.SpawnedWaves.Remove(gameObject);
+            // spawner.SpawnedWaves.Remove(gameObject);
             Destroy(gameObject);
         }
 
@@ -51,6 +51,7 @@ public class Wave : MonoBehaviour
         if (movementComponent.ReachedMaxHeight && !growthComponent.StartedGrowing)
         {
             growthComponent.StartGrowing();
+            // TODO Start Wave-Travelling Animation
         }
 
         

@@ -8,7 +8,10 @@ public class WaveMovement : MonoBehaviour
 
     [SerializeField] float sideMovementSpeed = 5.0f; // MOVE TO SPAWNER
 
-    float distanceTravelled = 0.0f;
+    // Time based wave calculation
+    float timeTravelled = 0.0f;
+    float crushingTime = 3.0f;
+
     float distanceRaised = 0.0f;
     float distanceLowered = 0.0f;
 
@@ -53,9 +56,11 @@ public class WaveMovement : MonoBehaviour
         StartCoroutine(MoveSideways());
 
         // While the wave did not travelled his maximum travel length
-        while (distanceTravelled < movementSettings.TravelDistance)
+        while (timeTravelled < movementSettings.TravelTime)
         {
-            distanceTravelled += movementSettings.TravelSpeed * Time.deltaTime;
+            // TIME CALCULATION
+            timeTravelled += Time.deltaTime;
+            print(timeTravelled);
 
             // Calculate the new position
             Vector3 moveToPosition = -transform.right * movementSettings.TravelSpeed * Time.deltaTime;
@@ -64,7 +69,7 @@ public class WaveMovement : MonoBehaviour
             transform.Translate(moveToPosition);
 
             // If it's time for the wave to crush down
-            if (distanceTravelled > movementSettings.TravelDistance / 2 && !startedBringingDown)
+            if (timeTravelled > movementSettings.TravelTime - crushingTime && !startedBringingDown)
             {
                 // Only do this once
                 startedBringingDown = true;
@@ -72,6 +77,8 @@ public class WaveMovement : MonoBehaviour
                 // Bring Wave Down
                 StopCoroutine(BringWaveDown());
                 StartCoroutine(BringWaveDown());
+
+                // TODO Start Wave-Crushing Animation
             }
 
             yield return null;
@@ -80,10 +87,53 @@ public class WaveMovement : MonoBehaviour
         isStopped = true;
     }
 
+    //IEnumerator MoveForward()
+    //{
+    //    // Start raising the  wave up
+    //    StopCoroutine(RaiseWaveUp());
+    //    StartCoroutine(RaiseWaveUp());
+
+    //    // TODO Move Wave sideways
+    //    StopCoroutine(MoveSideways());
+    //    StartCoroutine(MoveSideways());
+
+    //    // While the wave did not travelled his maximum travel length
+    //    while (distanceTravelled < movementSettings.TravelDistance)
+    //    {
+    //        // TIME CALCULATION
+    //        movementSettings.TravelTime += Time.deltaTime;
+
+    //        distanceTravelled += movementSettings.TravelSpeed * Time.deltaTime;
+
+    //        // Calculate the new position
+    //        Vector3 moveToPosition = -transform.right * movementSettings.TravelSpeed * Time.deltaTime;
+
+    //        // Move the wave forward
+    //        transform.Translate(moveToPosition);
+
+    //        // If it's time for the wave to crush down
+    //        if (distanceTravelled > movementSettings.TravelDistance / 2 && !startedBringingDown)
+    //        {
+    //            // Only do this once
+    //            startedBringingDown = true;
+
+    //            // Bring Wave Down
+    //            StopCoroutine(BringWaveDown());
+    //            StartCoroutine(BringWaveDown());
+
+    //            // TODO Start Wave-Crushing Animation
+    //        }
+
+    //        yield return null;
+    //    }
+
+    //    isStopped = true;
+    //}
+
     IEnumerator BringWaveDown()
     {
         // The amount the Wave has to be raised
-        float distanceToBringDown = movementSettings.RaiseSpeed * transform.localScale.y * Time.deltaTime;
+        float distanceToBringDown = movementSettings.RaiseSpeed * transform.localScale.y * Time.deltaTime * crushingTime; // TODO Remake calculation
         
         // Raise the wave out of the sea until it reaches it's maximum height
         while (distanceLowered < (movementSettings.WaveRaiseHeight * transform.localScale.y))

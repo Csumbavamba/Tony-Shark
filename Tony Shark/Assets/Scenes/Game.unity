@@ -4822,6 +4822,25 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6653680117756106816}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &772905208
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772905206}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 405cbad437fa43b418b275e7c97c3fe1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &842105458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5422,5 +5441,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1383781472}
+    - target: {fileID: 6653680117119647928, guid: 6ea14ff6029ff0246a43ede7311e79e5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.392
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ea14ff6029ff0246a43ede7311e79e5, type: 3}

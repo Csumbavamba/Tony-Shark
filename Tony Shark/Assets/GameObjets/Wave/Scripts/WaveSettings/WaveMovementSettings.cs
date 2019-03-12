@@ -6,5 +6,5 @@ public class WaveMovementSettings : ScriptableObject
     public float TravelSpeed;
     public float RaiseSpeed;
     public float WaveRaiseHeight;
-    public float TravelDistance;
+    public float TravelTime;
 }
