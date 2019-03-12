@@ -1,51 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AvatarControl : MonoBehaviour
 {
-    public Vector2 horizontalSpeeds = new Vector2 ( 50.0f, 50.0f );
-    public float jumpPower = 20.0f;
-
+    public Vector2 horizontalSpeeds = new Vector2(50.0f, 50.0f);
     Vector2 input;
-    Quaternion targetRotation;
-    float angle;
-
-    float balance = 0.0f;
-    public float balanceMaxAngle = 90.0f;
-    public Slider balanceSlider;
-    float balanceEasyAngle;
-    float balanceMedAngle;
-    float balanceHardAngle;
-    private float balanceEasyAcc = 1.0075f;
-    private float balanceMedAcc = 1.01f;
-    private float balanceHardAcc = 1.0125f;
-
-    float turnSpeed;
-
     Rigidbody rb;
+    public LayerMask ground;
+    RaycastHit hitInfo;
+    public float snapDistance = 2.0f;
+    public bool debug;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        balanceSlider.minValue = -balanceMaxAngle;
-        balanceSlider.maxValue =  balanceMaxAngle;
-        balanceEasyAngle    = balanceMaxAngle / 3f;
-        balanceMedAngle  = balanceMaxAngle / 1.5f;
-        balanceHardAngle    = balanceMaxAngle / 1.125f;
     }
 
-    void Update()
+    private void Update()
     {
         GetInput();
+        DrawLines();
+    }
 
-        if (Mathf.Abs(input.x) < 1 && Mathf.Abs(input.y) < 1) return;
-
-        CalculateDirection();
-        Balance();
-        Rotate();
+    private void FixedUpdate()
+    {
+        Hover();
         Move();
     }
 
@@ -55,34 +35,26 @@ public class AvatarControl : MonoBehaviour
         input.y = Input.GetAxisRaw("Vertical");
     }
 
-    void CalculateDirection()
-    {
-        angle = Mathf.Atan2(input.x, 1);
-        angle = Mathf.Rad2Deg * angle;
-    }
-
-    void Rotate()
-    {
-        targetRotation = Quaternion.Euler(0, angle, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-    }
-
-    void Balance()
-    {
-        balance += input.x;
-
-        if (balance > balanceEasyAngle) balance *= balanceEasyAcc;
-        else if (balance > balanceMedAngle) balance *= balanceMedAcc;
-        else if (balance > balanceHardAngle) balance *= balanceHardAcc;
-
-        Mathf.Clamp(balance, -balanceMaxAngle, balanceMaxAngle);
-        turnSpeed = Mathf.Abs(balance)/500.0f;
-
-        balanceSlider.value = balance;
-    }
-
     void Move()
     {
-        rb.AddForce(transform.forward * horizontalSpeeds.y * Time.deltaTime, ForceMode.VelocityChange);
+        rb.AddForce(transform.right * horizontalSpeeds.y * Time.deltaTime * input.x, ForceMode.VelocityChange);
+    }
+
+    void Hover()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, snapDistance, ground))
+        {
+            if (Vector3.Distance(transform.position, hitInfo.point) < snapDistance)
+            {
+                transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up * snapDistance, 0.1f);
+            }
+        }
+    }
+
+    void DrawLines()
+    {
+        if (!debug) return;
+
+        Debug.DrawLine(rb.position, rb.position + Vector3.down * snapDistance, Color.red);
     }
 }
