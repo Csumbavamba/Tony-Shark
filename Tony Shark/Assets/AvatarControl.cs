@@ -18,10 +18,12 @@ public class AvatarControl : MonoBehaviour
 
     //-----For Movement
     Vector3 maxVelocity;
+    Vector3 minVelocity;
     Vector3 velocity = Vector3.zero;
     Vector3 acceleration = Vector3.zero;
     public Vector3 moveSpeed = new Vector3(10.0f, 10.0f, 10.0f);
     public float groundFriction = 1.0f;
+    
 
 
     //-----For Balance
@@ -35,7 +37,7 @@ public class AvatarControl : MonoBehaviour
     private float balanceEasyAcc = 1.0075f;
     private float balanceMedAcc = 1.01f;
     private float balanceHardAcc = 1.0125f;
-    Riding riding;
+    Riding riding = Riding.NONE;
 
     enum Riding
     {
@@ -57,7 +59,11 @@ public class AvatarControl : MonoBehaviour
         balanceHardAngle = balanceMaxAngle / 1.125f;
 
         //-----For Movement
-        maxVelocity = moveSpeed * 3;
+        maxVelocity.y = moveSpeed.y * 5;
+        maxVelocity.x = moveSpeed.x * 3;
+        
+
+        minVelocity.z = moveSpeed.z;
     }
 
     private void Update()
@@ -81,19 +87,24 @@ public class AvatarControl : MonoBehaviour
     void Move()
     {
 
-        if (OnWave())
-        {
-            MoveHorizontal(0.5f);
-        }
-        else if (!OnGround())
+
+        print(velocity.z);
+
+        if (!OnGround())
         {
             //If we're not on the ground, be affected by gravity
-            acceleration.y += Physics.gravity.y * Time.deltaTime;
+            acceleration.y += Physics.gravity.y / 2 * Time.deltaTime;
             MoveHorizontal(0.5f);
         }
         else
         {
+            OnWave();
             MoveHorizontal(1f);
+            if (riding != Riding.NONE) velocity.z += moveSpeed.z * 0.1f;
+            if (Mathf.Abs(velocity.z) > minVelocity.z) Mathf.Lerp(velocity.z, minVelocity.z * Mathf.Sign(velocity.z), 0.125f);
+            else velocity.z = minVelocity.z;
+
+            if (Mathf.Abs(velocity.x) > maxVelocity.x) Mathf.Lerp(velocity.x, maxVelocity.x * Mathf.Sign(velocity.x), 1f);
         }
 
 
@@ -108,52 +119,48 @@ public class AvatarControl : MonoBehaviour
     void MoveHorizontal(float multiplier)
     {
         //Side to Side using velocity
-        //if (Mathf.Abs(velocity.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance)) < maxVelocity.x)
-        //{
-        //    velocity.x += moveSpeed.x * turnSpeed * Mathf.Sign(balance);
-        //}
-        //else velocity.x = Mathf.Sign(velocity.x) * maxVelocity.x;
+        if(Mathf.Abs(velocity.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance) * multiplier) < maxVelocity.x) velocity.x += moveSpeed.x * turnSpeed * Mathf.Sign(balance) * multiplier;
 
-        //Side to Side using acceleration
-        if (Mathf.Abs(acceleration.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance)) < maxVelocity.x)
-        {
-            acceleration.x = moveSpeed.x * turnSpeed * Mathf.Sign(balance);
-        }
-        else acceleration.x = Mathf.Sign(acceleration.x) * maxVelocity.x;
+        ////Side to Side using acceleration
+        //if (Mathf.Abs(acceleration.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance)) < maxVelocity.x)
+        //{
+        //    acceleration.x = moveSpeed.x * turnSpeed * Mathf.Sign(balance);
+        //}
+        //else acceleration.x = Mathf.Sign(acceleration.x) * maxVelocity.x;
 
         //Foward
-        velocity.z = moveSpeed.z * input.y;
+        //velocity.z = moveSpeed.z * input.y;
     }
 
     bool OnWave()
     {
-        //Check if there is a Wave to the right
-        if (Physics.Raycast(transform.position, Vector3.right + (Vector3.down / 2), out waveHit, snapDistance, wave) && riding != Riding.LEFT)
+        if (groundHit.transform.tag == "Rideable")
         {
-            print("raycast hit right!");
-            transform.position = Vector3.Lerp(transform.position, waveHit.point + Vector3.up * snapDistance, 0.01f);
-            balance += 1;
-            riding = Riding.RIGHT;
-            return true;
-        }
-        //Check if there is a wave to the left
-        else if (Physics.Raycast(transform.position,  -Vector3.right + (Vector3.down / 2), out waveHit, snapDistance, wave) && riding != Riding.RIGHT)
-        {
-            print("raycast hit left!");
-            transform.position =  Vector3.Lerp(transform.position, waveHit.point + Vector3.up * snapDistance, 0.01f);
-
-            balance -= 1f;
             riding = Riding.LEFT;
-            return true;
+        }
+        else if (riding != Riding.NONE)
+        {
+            //if (riding == Riding.LEFT)
+            //{
+            //    velocity.x -= 10.0f;
+            //}
+            //else if (riding == Riding.RIGHT)
+            //{
+            //    velocity.x += 10.0f;
+            //}
+            //velocity.y += 25f;
+            riding = Riding.NONE;
+
+            return false;
         }
         return false;
+
     }
 
     bool OnGround()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out groundHit, snapDistance, ground))
         {
-            print("Raycast hit down!");
             if (Vector3.Distance(transform.position, groundHit.point) < snapDistance)
             {
                 transform.position = Vector3.Lerp(transform.position, groundHit.point + Vector3.up * snapDistance, 0.5f);

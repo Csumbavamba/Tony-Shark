@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Rideable
   - Fall
+  - wave
   layers:
   - Default
   - TransparentFX
