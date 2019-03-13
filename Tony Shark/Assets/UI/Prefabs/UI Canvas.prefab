@@ -124,25 +124,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!95 &1644825589227977760
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644825589227977774}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 405cbad437fa43b418b275e7c97c3fe1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1644825589347972298
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,32 +621,8 @@ PrefabInstance:
       propertyPath: uiSounds
       value: 
       objectReference: {fileID: 4772974294852456601}
-    - target: {fileID: 9059920570448920106, guid: 797fc9b7471fa1241b53a8385589273e,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9059920570448920106, guid: 797fc9b7471fa1241b53a8385589273e,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9059920570448920106, guid: 797fc9b7471fa1241b53a8385589273e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6980101503119861371, guid: 797fc9b7471fa1241b53a8385589273e,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6980101503119861371, guid: 797fc9b7471fa1241b53a8385589273e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5524979444675198642, guid: 797fc9b7471fa1241b53a8385589273e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 797fc9b7471fa1241b53a8385589273e, type: 3}
 --- !u!224 &4114497305922048140 stripped
 RectTransform:
@@ -795,17 +752,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6653680117119647928, guid: 6ea14ff6029ff0246a43ede7311e79e5,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.392
-      objectReference: {fileID: 0}
-    - target: {fileID: 6653680116207620285, guid: 6ea14ff6029ff0246a43ede7311e79e5,
+    - target: {fileID: 6653680116345334108, guid: 6ea14ff6029ff0246a43ede7311e79e5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1644825590228627640}
-    - target: {fileID: 6653680116345334108, guid: 6ea14ff6029ff0246a43ede7311e79e5,
+    - target: {fileID: 6653680116207620285, guid: 6ea14ff6029ff0246a43ede7311e79e5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

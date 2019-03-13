@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 407061827}
   - component: {fileID: 407061826}
   - component: {fileID: 407061825}
+  - component: {fileID: 407061829}
   m_Layer: 9
   m_Name: Sea
   m_TagString: Untagged
@@ -301,6 +302,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407061829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407061824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a687ae56d2cbf834bbfa07588fdfb794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &411335745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8936895073006071427, guid: bb81278c7958ef2489790a5f927a0741,
@@ -949,8 +962,7 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6520987552002920544, guid: c927eb09a35853b4b9654d0dd0b74fd7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c927eb09a35853b4b9654d0dd0b74fd7, type: 3}
 --- !u!1001 &4713184220544271571
 PrefabInstance:

@@ -7,7 +7,6 @@ public class Wave : MonoBehaviour
 {
     WaveMovement movementComponent;
     WaveGrowth growthComponent;
-    WaveAnimator animatorComponent;
     Spawner spawner;
     
 
@@ -18,7 +17,6 @@ public class Wave : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        animatorComponent = gameObject.AddComponent<WaveAnimator>();
         movementComponent = gameObject.AddComponent<WaveMovement>();
         movementComponent.SetupMovementSettings(settings.MovementSettings);
 
