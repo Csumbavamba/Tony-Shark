@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0986b42dbc46a3545898b593ac14ad91
+guid: ceb0a79dec1481a418ddf5fc2fcf175e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -41,7 +41,7 @@ ModelImporter:
     4300010: Base HumanTail007
     4300012: Base HumanTail008
     4300014: Base HumanTail009
-    7400000: Wave-Raising
+    7400000: Wave-Forming
     9500000: //RootNode
     13700000: Inner_surface
     13700002: Inner_wave
@@ -75,10 +75,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Wave-Raising
+      name: Wave-Forming
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 6
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

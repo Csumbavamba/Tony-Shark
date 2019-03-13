@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TravelSpeed: 3
   RaiseSpeed: 0.3
-  WaveRaiseHeight: 2.7
-  TravelDistance: 100
+  WaveRaiseHeight: 3.5
+  TravelTime: 25

@@ -589,9 +589,9 @@ MeshFilter:
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &774982849
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8936895073006071427, guid: bb81278c7958ef2489790a5f927a0741,
+    type: 3}
+  m_PrefabInstance: {fileID: 8936895073371972162}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774982843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}

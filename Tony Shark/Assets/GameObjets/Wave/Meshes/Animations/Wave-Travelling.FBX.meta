@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ad814df8d112384c83c74a956a0adac
+guid: 02fbb93bd6e374c489e972ddfde3fafe
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -77,8 +77,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Wave-Travelling
       takeName: Take 001
-      firstFrame: 0
-      lastFrame: 20
+      firstFrame: 6
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

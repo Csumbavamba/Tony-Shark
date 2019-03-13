@@ -7,10 +7,12 @@ public class WaveGrowth : MonoBehaviour
     
     WaveMovement movementComponent;
     bool startedGrowing = false;
+    bool stoppedGrowing = false;
 
     [SerializeField] float growthRate = 0.2f; // Think about making this into a scriptable Object
 
     public bool StartedGrowing { get => startedGrowing; }
+    public bool StoppedGrowing { get => stoppedGrowing; }
 
     private void Awake()
     {
@@ -24,6 +26,13 @@ public class WaveGrowth : MonoBehaviour
 
         StopCoroutine(GrowWave());
         StartCoroutine(GrowWave());
+    }
+
+    public void StopGrowing()
+    {
+        stoppedGrowing = true;
+
+        StopCoroutine(GrowWave());
     }
 
     IEnumerator GrowWave()

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e92cdb34b5a4443a3f38d37d0fc101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideMovementSpeed: 5
-  wavePrefab: {fileID: 1868931371393101866, guid: e23a9b0ce46c51c47bedc825b0e5bad3,
+  wavePrefab: {fileID: 8416038811025487190, guid: 7bcbd7ef57f89ea42ab250f991d99753,
     type: 3}
   size: {x: 100, y: 0, z: 100}
+  minimumDistanceToSpawn: 50

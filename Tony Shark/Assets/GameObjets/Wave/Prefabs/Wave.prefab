@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1610879991}
   - component: {fileID: 1610879990}
   - component: {fileID: 1610879989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left (1)
   m_TagString: Rideable
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1989041137}
   - component: {fileID: 1989041136}
   - component: {fileID: 1989041135}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right (1)
   m_TagString: Rideable
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 6397557500340806839}
   - component: {fileID: 2292769582593671612}
   - component: {fileID: 3963688637456155931}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right
   m_TagString: Rideable
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8337699823232339292}
   - component: {fileID: 513521102}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 5424674426190852552}
   - component: {fileID: 5081695494285516089}
   - component: {fileID: 4635305510333910590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 2683785920829832221}
   - component: {fileID: 8540132368789634207}
   - component: {fileID: 46058258308220128}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rideable-Middle
   m_TagString: Rideable
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9188421401506461013}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wave-Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 955978238929562688}
   - component: {fileID: 5058899230336921216}
   - component: {fileID: 6149680144628809477}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left
   m_TagString: Rideable
   m_Icon: {fileID: 0}
