@@ -512,6 +512,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 873837356627465593, guid: 882d1311e5917d143b2eb08fcd18e74d,
+        type: 3}
+      propertyPath: wavePrefab
+      value: 
+      objectReference: {fileID: 1868931371393101866, guid: 7eabdc36263f30846b01df36688de4d9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 882d1311e5917d143b2eb08fcd18e74d, type: 3}
 --- !u!1 &1525248004
@@ -943,7 +949,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6520987552002920544, guid: c927eb09a35853b4b9654d0dd0b74fd7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c927eb09a35853b4b9654d0dd0b74fd7, type: 3}
 --- !u!1001 &4713184220544271571
 PrefabInstance:
