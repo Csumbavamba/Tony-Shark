@@ -135,9 +135,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -220, y: 120}
-  m_SizeDelta: {x: 178, y: 78}
-  m_Pivot: {x: 0.74, y: -2.56}
+  m_AnchoredPosition: {x: -953, y: 141}
+  m_SizeDelta: {x: 380, y: 82}
+  m_Pivot: {x: 0.5000001, y: 0.49999994}
 --- !u!222 &2322927466993676019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 11b8f7ce2f7a7234aad11a383eef3104, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7694bbd99169cdf4bbbf8dcb6b08c833, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2161521148059249600, guid: 8754af50a0848054caf785b412f5bc70,
           type: 3}
-        m_MethodName: LoadGameScene
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -294,7 +294,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ed89e37b4ce84474fb8bc9904a82a282, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db5f16581347011408fb8445a7c580a0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
