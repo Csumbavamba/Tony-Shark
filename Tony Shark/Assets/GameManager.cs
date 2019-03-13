@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
         if (!PauseMenu.isPaused)
         {
             // Add Game Logic here
+            
+            
         }
 
         UpdateScore();
