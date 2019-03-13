@@ -10,12 +10,10 @@ public class GameManager : MonoBehaviour
 
     SceneLoader sceneLoader;
     PauseMenu pauseMenu;
-    // Spawner waveSpawner;
     TrickManager trickManager;
 
     Spawner[] spawners;
     
-    public GameObject avatar;
     AvatarControl avatarScript;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI turboText;
@@ -33,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
         pauseMenu = FindObjectOfType<PauseMenu>();
-        // waveSpawner = FindObjectOfType<Spawner>();
+        avatarScript = FindObjectOfType<AvatarControl>();
 
         spawners = FindObjectsOfType<Spawner>();
 
@@ -45,13 +43,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        avatarScript = avatar.GetComponent<AvatarControl>();
         Invoke("StartSpawning", 2f);
     }
 
-    public void StartSpawning()
+    void StartSpawning()
     {
-        foreach (Spawner spawner in spawners)
+        foreach(Spawner spawner in spawners)
         {
             spawner.SpawnWaves();
         }
