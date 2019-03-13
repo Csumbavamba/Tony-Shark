@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Invoke("SpawnWaves", 2f); 
+    }
+
+    void SpawnWaves()
+    {
         waveSpawner.SpawnWaves();
     }
 

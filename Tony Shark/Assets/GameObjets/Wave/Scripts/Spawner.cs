@@ -30,6 +30,7 @@ public class Spawner : MonoBehaviour
 
     public void SpawnWaves()
     {
+        
         StopCoroutine(SpawnWavesContinuously());
         StartCoroutine(SpawnWavesContinuously());
     }
