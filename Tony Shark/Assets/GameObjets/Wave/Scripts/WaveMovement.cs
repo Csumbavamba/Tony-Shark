@@ -16,6 +16,7 @@ public class WaveMovement : MonoBehaviour
     bool startedBringingDown = false;
     bool isStopped = false;
     bool reachedMaxHeight = false;
+    
 
     // Just Getters
     public bool IsStopped { get => isStopped;}
@@ -93,7 +94,6 @@ public class WaveMovement : MonoBehaviour
         // Raise the wave out of the sea until it reaches it's maximum height
         while (distanceLowered < (movementSettings.WaveRaiseHeight * transform.localScale.y / 5.0f))
         {
-            print(movementSettings.WaveRaiseHeight * transform.localScale.y);
             distanceLowered += distanceToBringDown;
 
             // Calculate the new position
