@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class SmoothFollow : MonoBehaviour
 {
-    public Transform target;
+    Transform target;
 
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
+
+    private void Awake()
+    {
+        target = FindObjectOfType<AvatarControl>().transform;
+    }
 
     void FixedUpdate()
     {

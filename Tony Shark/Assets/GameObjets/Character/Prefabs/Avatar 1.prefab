@@ -28,8 +28,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4031134650812092130}
-  - component: {fileID: 4031134650812092131}
-  - component: {fileID: 4031134650812092060}
   - component: {fileID: 4031134650812092061}
   - component: {fileID: 4031134650812092063}
   - component: {fileID: 4031134650812092062}
@@ -43,8 +41,7 @@ GameObject:
 --- !u!4 &4031134650812092130
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8936895073006071427, guid: bb81278c7958ef2489790a5f927a0741,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4031134650812092056}
@@ -56,51 +53,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4031134650812092131
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031134650812092056}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4031134650812092060
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031134650812092056}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!136 &4031134650812092061
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -137,8 +89,10 @@ MonoBehaviour:
     m_Bits: 1024
   snapDistance: 2
   debug: 1
+  velocity: {x: 0, y: 0, z: 0}
   moveSpeed: {x: 2, y: 10, z: 5}
   groundFriction: 1
+  turboPower: 0
   balanceNeedle: {fileID: 0}
   balanceMaxAngle: 90
 --- !u!143 &4031134650812092062
@@ -214,18 +168,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400186, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400186, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400186, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 11100000, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
       propertyPath: m_Animations.Array.size
       value: 1
@@ -238,14 +180,14 @@ PrefabInstance:
       propertyPath: m_Animations.Array.data[0]
       value: 
       objectReference: {fileID: 7400000, guid: 7fc0c3eb09c48634e933a2c04703611d, type: 3}
-    - target: {fileID: 13700000, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 43b5ba566994066449e3bcf27c7affce, type: 2}
     - target: {fileID: 13700002, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8278eb897ee59a842bf72547e6f42c70, type: 2}
+    - target: {fileID: 13700000, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43b5ba566994066449e3bcf27c7affce, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 736e23957d522aa4bb6422c3d47b05b6, type: 3}
 --- !u!1 &4031134649638506853 stripped
