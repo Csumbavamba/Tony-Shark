@@ -8,8 +8,11 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject wavePrefab;
     [SerializeField] Vector3 size;
     [SerializeField] float minimumDistanceToSpawn = 50f;
+    [SerializeField] float spawnDelay = 1.0f;
+    [SerializeField] Color gizmoColor = Color.red;
+
     Vector3 positionFromplayer;
-    [SerializeField] GameObject player;
+    GameObject player;
 
     List<GameObject> spawnedWaves;
 
@@ -18,7 +21,7 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         spawnedWaves = new List<GameObject>();
-        // player = FindObjectOfType<AvatarControl>().gameObject;
+        player = FindObjectOfType<AvatarControl>().gameObject;
 
         CalculateDistanceFromPlayer();
     }
@@ -76,13 +79,11 @@ public class Spawner : MonoBehaviour
             // If x distance is too close, return true
             if (Vector3.Distance(wave.transform.position, spawnPosition) < minimumDistanceToSpawn)
             {
-                print("Wave too close");
                 return true;
             }
         }
 
         // Otherwise return false
-        print("Wave in good distance");
         return false;
     }
 
@@ -102,7 +103,7 @@ public class Spawner : MonoBehaviour
                 // Instantiate the Wave and add to the List of Waves
                 GameObject spawnedWave = Instantiate(wavePrefab, spawnPosition, Quaternion.Euler(new Vector3(0.0f, -90.0f, 0.0f)));
                 spawnedWaves.Add(spawnedWave);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(spawnDelay);
             } 
         } 
     }
@@ -110,7 +111,7 @@ public class Spawner : MonoBehaviour
     // For Debug
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = gizmoColor;
         Gizmos.DrawCube(transform.position, size);
     }
 }
