@@ -9,7 +9,7 @@ public class WaveGrowth : MonoBehaviour
     bool startedGrowing = false;
     bool stoppedGrowing = false;
 
-    [SerializeField] float growthRate = 0.2f; // Think about making this into a scriptable Object
+    [SerializeField] float growthRate = 0.05f; // Think about making this into a scriptable Object
 
     public bool StartedGrowing { get => startedGrowing; set => startedGrowing = value; }
     public bool StoppedGrowing { get => stoppedGrowing; }
