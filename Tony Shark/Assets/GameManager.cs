@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] float maxTimeToTrick = 3.0f;
+
     SceneLoader sceneLoader;
     PauseMenu pauseMenu;
-    Spawner waveSpawner;
+    // Spawner waveSpawner;
     TrickManager trickManager;
+
+    Spawner[] spawners;
+    
 
     public void LoseGame()
     {
@@ -19,9 +24,13 @@ public class GameManager : MonoBehaviour
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
         pauseMenu = FindObjectOfType<PauseMenu>();
-        waveSpawner = FindObjectOfType<Spawner>();
-        trickManager = FindObjectOfType<TrickManager>();
+        // waveSpawner = FindObjectOfType<Spawner>();
 
+        spawners = FindObjectsOfType<Spawner>();
+
+        // Setup Trick Manager
+        trickManager = FindObjectOfType<TrickManager>();
+        trickManager.MaxTimeToTrick = maxTimeToTrick;
         trickManager.gameObject.SetActive(false);
     }
 
@@ -32,14 +41,18 @@ public class GameManager : MonoBehaviour
 
     public void StartSpawning()
     {
-        waveSpawner.SpawnWaves();
+        foreach (Spawner spawner in spawners)
+        {
+            spawner.SpawnWaves();
+        }
+        // waveSpawner.SpawnWaves();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Pause Menu
-        if (Input.GetKeyDown(KeyCode.Escape) && !trickManager.enabled)
+        // Pause Menu - only if the trick manager is not active
+        if (Input.GetKeyDown(KeyCode.Escape) && !trickManager.gameObject.activeSelf)
         {
             if (PauseMenu.isPaused)
             {
@@ -51,20 +64,26 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Losing - TODO make it based on falling
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!PauseMenu.isPaused)
         {
-            print("Space pressed."); // TODO FIX
-            if (trickManager.enabled)
+            // TODO - remove after testing
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                trickManager.gameObject.SetActive(false);
+                // If It is active, enable it
+                if (trickManager.gameObject.activeSelf)
+                {
+                    trickManager.gameObject.SetActive(false);
+                }
+                else
+                {
+                    trickManager.gameObject.SetActive(true);
+                    trickManager.TryToDoTrick();
+                }
+
             }
-            else
-            {
-                trickManager.gameObject.SetActive(true);
-            }
-            
         }
+
+        
 
     }
 }

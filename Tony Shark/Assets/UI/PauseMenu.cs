@@ -8,8 +8,6 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject slider;
-    // Start is called before the first frame update
-
 
     public void Resume()
     {

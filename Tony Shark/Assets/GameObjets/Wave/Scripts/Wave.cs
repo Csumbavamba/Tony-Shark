@@ -24,8 +24,16 @@ public class Wave : MonoBehaviour
 
         growthComponent = gameObject.AddComponent<WaveGrowth>();
 
-        
-        spawner = FindObjectOfType<Spawner>();
+        // Locate the  right spawner
+        var spawners = FindObjectsOfType<Spawner>();
+
+        foreach(Spawner potentialSpawner in spawners)
+        {
+            if (potentialSpawner.tag == "WaveSpawner")
+            {
+                spawner = potentialSpawner;
+            }
+        }
     }
 
     // TODO remove once Wave Controller spawns the waves

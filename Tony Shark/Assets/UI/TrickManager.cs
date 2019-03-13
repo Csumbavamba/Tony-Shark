@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 [System.Serializable]
 public struct ButtonSprites
@@ -17,7 +19,7 @@ public class ButtonSettings
 
     public ButtonSettings() { }
 
-    public ButtonSettings(KeyCode codeToHit, ButtonSprites uiImage)
+    public void SetButtonSettings(KeyCode codeToHit, ButtonSprites uiImage)
     {
         this.codeToHit = codeToHit;
         this.uiSprites = uiImage;
@@ -31,20 +33,38 @@ public class TrickManager : MonoBehaviour
 {
     
     [SerializeField] ButtonSprites[] buttonSprites;
-    [SerializeField] float maxTimeToTrick = 5.0f;
+    [SerializeField] GameObject successParticles;
+    [SerializeField] GameObject mistakeImage;
+    [SerializeField] float mistakeDisplaySpeed = 4.0f;
 
+    [SerializeField] AudioClip timeSlowDown;
+    [SerializeField] AudioClip timeToNormal;
+    [SerializeField] AudioClip success;
+    [SerializeField] AudioClip failure;
+
+    float maxTimeToTrick = 5.0f;
+    Slider timeLeftSlider;
     KeyCode[] validKeys;
     TrickButton[] buttons;
     float timeLeftToTrick;
     int currentStep = 0;
+    bool readyToSpawn = false;
+    Color mistakeColor;
     bool isTrickFailed = false;
+    AudioSource audioSource;
+
 
     public bool IsTrickFailed { get => isTrickFailed; }
+    public float MaxTimeToTrick { get => maxTimeToTrick; set => maxTimeToTrick = value; }
+    public bool ReadyToSpawn { get => readyToSpawn; set => readyToSpawn = value; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        // buttons = new TrickButton[4];
         buttons = GetComponentsInChildren<TrickButton>();
+        audioSource = GetComponent<AudioSource>();
+
         timeLeftToTrick = maxTimeToTrick;
 
         // Add valid key codes
@@ -54,29 +74,41 @@ public class TrickManager : MonoBehaviour
         validKeys[2] = KeyCode.DownArrow;
         validKeys[3] = KeyCode.RightArrow;
 
-        // Chose a random Sprite and set up the button
-        foreach (TrickButton button in buttons)
-        {
-            button.SetupButtonSettings(GenerateRandomButtonSettings());
-        }
-    }
+        // Setup Slider
+        timeLeftSlider = GetComponentInChildren<Slider>();
+        timeLeftSlider.maxValue = maxTimeToTrick;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TryToDoTrick();
-        }
+        // Setup Particles and Mistake Image
+        DisableParticles();
+        mistakeColor = mistakeImage.GetComponent<Image>().color;
+        mistakeColor.a = 0.0f;
     }
 
     public void TryToDoTrick()
     {
+        ResetManager();
+
+        // Slow down time for epic feeling
+        SlowDownTime();
+
+        // Start the Challange
         StopCoroutine(RunTrickChallange());
         StartCoroutine(RunTrickChallange());
     }
 
-    public void ResetManager()
+    void SlowDownTime()
+    {
+        // Play the sound if it's not playing
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(timeSlowDown, 1.0f);
+        }
+
+        StopCoroutine(SlowTimeGradually());
+        StartCoroutine(SlowTimeGradually());
+    }
+
+    void ResetManager()
     {
         // Reset all buttons
         foreach (TrickButton button in buttons)
@@ -110,29 +142,92 @@ public class TrickManager : MonoBehaviour
             }
 
             // Decrease the time that's left
-            timeLeftToTrick -= Time.deltaTime;
+            timeLeftToTrick -= Time.deltaTime / Time.timeScale;
+            timeLeftSlider.value = timeLeftToTrick;
             yield return null;
         }
+
+        // Scale the timeScale back to normal
+        ScaleTimeBack();
 
         // Decide on outcome
         if (timeLeftToTrick < 0.0f || isTrickFailed)
         {
             // Run Failed Animation - TODO add from Player
-            print("Trick failed.");
+            audioSource.PlayOneShot(failure, 1.0f);
+            StopCoroutine(PlayUIDamageOverlay());
+            StartCoroutine(PlayUIDamageOverlay());
         }
         else
         {
             // Run success Animation - TODO add from Player
-            print("Trick SUCCESS!!!");
+            EnableParticles();
+            audioSource.PlayOneShot(success, 1.0f);
+            Invoke("DisableParticles", .5f);
+        }
+    }
+
+    void ScaleTimeBack()
+    {
+        // Play the sound if it's not playing
+        audioSource.Stop();
+        audioSource.PlayOneShot(timeToNormal, 1.0f);
+
+        StopCoroutine(SetTimeBackToNormal());
+        StartCoroutine(SetTimeBackToNormal());
+    }
+
+    void EnableParticles()
+    {
+        var emissionModule = successParticles.GetComponent<ParticleSystem>().emission;
+
+        emissionModule.enabled = true;
+        
+
+    }
+
+    void DisableParticles()
+    {
+        var emissionModule = successParticles.GetComponent<ParticleSystem>().emission;
+
+        emissionModule.enabled = false;
+    }
+
+    IEnumerator PlayUIDamageOverlay()
+    {
+        mistakeColor.a = 0.8f;
+
+        while (mistakeColor.a > 0.0f)
+        {
+            mistakeColor.a -= Time.deltaTime * mistakeDisplaySpeed;
+            mistakeImage.GetComponent<Image>().color = mistakeColor;
+            yield return null;
+        }
+    }
+
+    IEnumerator SlowTimeGradually()
+    {
+        while (Time.timeScale > 0.1f)
+        {
+            Time.timeScale -= 2f * Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator SetTimeBackToNormal()
+    {
+        while (Time.timeScale < 1f)
+        {
+            Time.timeScale += 6f * Time.deltaTime;
+            yield return null;
         }
 
-        // Reset the button settings
-        Invoke("ResetManager", 2f);
+        Time.timeScale = 1f;
     }
 
     ButtonSettings GenerateRandomButtonSettings()
     {
-        ButtonSettings randomButton;
+        ButtonSettings randomButton = new ButtonSettings();
 
         int generatedDirection = Random.Range(0, 4);
 
@@ -140,22 +235,22 @@ public class TrickManager : MonoBehaviour
         // Left Arrow
         if (generatedDirection == 0)
         {
-            randomButton = new ButtonSettings(KeyCode.LeftArrow, buttonSprites[0]);
+            randomButton.SetButtonSettings(KeyCode.LeftArrow, buttonSprites[0]);
         }
         // Up Arrow
         else if (generatedDirection == 1)
         {
-            randomButton = new ButtonSettings(KeyCode.UpArrow, buttonSprites[1]);
+            randomButton.SetButtonSettings(KeyCode.UpArrow, buttonSprites[1]);
         }
         // Down Arrow
         else if (generatedDirection == 2)
         {
-            randomButton = new ButtonSettings(KeyCode.DownArrow, buttonSprites[2]);
+            randomButton.SetButtonSettings(KeyCode.DownArrow, buttonSprites[2]);
         }
         // Right Arrow
         else
         {
-            randomButton = new ButtonSettings(KeyCode.RightArrow, buttonSprites[3]);
+            randomButton.SetButtonSettings(KeyCode.RightArrow, buttonSprites[3]);
         }
 
         return randomButton;
