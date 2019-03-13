@@ -475,6 +475,12 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 237291731}
+    - target: {fileID: 873837356627465593, guid: 882d1311e5917d143b2eb08fcd18e74d,
+        type: 3}
+      propertyPath: wavePrefab
+      value: 
+      objectReference: {fileID: 8416038811025487190, guid: e23a9b0ce46c51c47bedc825b0e5bad3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 882d1311e5917d143b2eb08fcd18e74d, type: 3}
 --- !u!4 &774982849 stripped

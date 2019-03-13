@@ -133,19 +133,4 @@ public class WaveMovement : MonoBehaviour
         print("Max height reached");
     }
 
-    //IEnumerator MoveSideways()
-    //{
-    //    while(true)
-    //    {
-    //        // Start moving the wave sideway
-    //        Vector3 sideMovementPosition = transform.forward * sideMovementSpeed * Time.deltaTime; // TODO make this decided by the spawner
-
-    //        // Move the way sideways
-    //        transform.Translate(sideMovementPosition);
-
-    //        yield return null;
-    //    }
-        
-        
-    //}
 }
