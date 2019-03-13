@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +15,16 @@ public class GameManager : MonoBehaviour
 
     Spawner[] spawners;
     
+    public GameObject avatar;
+    AvatarControl avatarScript;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI turboText;
+    public TextMeshProUGUI scoreText;
+
+    public void LoseGame()
+    {
+        sceneLoader.LoadLoseScene();
+    }
 
     
 
@@ -33,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        avatarScript = avatar.GetComponent<AvatarControl>();
         Invoke("StartSpawning", 2f);
     }
 
@@ -65,18 +78,19 @@ public class GameManager : MonoBehaviour
             // Add Game Logic here
         }
 
-        
-
+        SetUIText();
     }
 
-    public void LoseGame()
+    void SetUIText()
     {
-        // Play Lose things here
+        string setText = "Speed: ";
+        setText += ((int)avatarScript.velocity.z).ToString();
+        speedText.SetText(setText);
 
-        // Last call here...
-        sceneLoader.LoadLoseScene();
+        setText = "Turbo Power: ";
+        setText += ((int)avatarScript.turboPower).ToString();
+        turboText.SetText(setText);
     }
-
     public void StartTrick()
     {
         // Make sure to not start it while it's going
@@ -91,4 +105,5 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
 }

@@ -101,7 +101,7 @@ public class Spawner : MonoBehaviour
             else
             {
                 // Instantiate the Wave and add to the List of Waves
-                GameObject spawnedWave = Instantiate(wavePrefab, spawnPosition, Quaternion.identity);
+                GameObject spawnedWave = Instantiate(wavePrefab, spawnPosition, Quaternion.Euler(new Vector3(0.0f, -90.0f, 0.0f)));
                 spawnedWaves.Add(spawnedWave);
                 yield return new WaitForSeconds(spawnDelay);
             } 
