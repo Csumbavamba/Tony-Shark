@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         // Losing - TODO make it based on falling
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            LoseGame();
+            //LoseGame();
         }
 
         SetUIText();

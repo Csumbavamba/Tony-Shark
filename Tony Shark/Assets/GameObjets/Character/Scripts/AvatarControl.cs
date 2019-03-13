@@ -44,6 +44,9 @@ public class AvatarControl : MonoBehaviour
     Quaternion targetRotation;
     float angle;
 
+    //-----For Jumping
+    bool jumping = false;
+
     enum Riding
     {
         LEFT,
@@ -77,6 +80,7 @@ public class AvatarControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Jump();
         Move();
     }
 
@@ -88,15 +92,12 @@ public class AvatarControl : MonoBehaviour
 
     void Move()
     {
-
-
-        print(velocity.z);
-
+        ApplyGravity();
+       
         if (!OnGround())
         {
             //If we're not on the ground, be affected by gravity
-            acceleration.y += -1 * Time.deltaTime;
-            print(acceleration.y);
+            
             MoveHorizontal(0.5f + turboPower);
         }
         else
@@ -107,8 +108,8 @@ public class AvatarControl : MonoBehaviour
 
             if (riding != Riding.NONE)
             {
-                turboPower += 1.0f * Time.deltaTime;
-                velocity.z += turboPower / 10;
+                turboPower += 10.0f * Time.deltaTime;
+                velocity.z += turboPower / 100;
             }
             if (Mathf.Abs(velocity.z) > minVelocity.z)
             {
@@ -138,6 +139,7 @@ public class AvatarControl : MonoBehaviour
         if (groundHit.transform.tag == "Rideable")
         {
             riding = Riding.LEFT;
+            return false;
         }
         else if (riding != Riding.NONE)
         {
@@ -146,8 +148,8 @@ public class AvatarControl : MonoBehaviour
         }
         else
         {
-            riding = Riding.NONE;
             turboPower = Mathf.Lerp(turboPower, 0, 0.2f);
+            riding = Riding.NONE;
         }
         return false;
 
@@ -155,20 +157,23 @@ public class AvatarControl : MonoBehaviour
 
     bool OnGround()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, snapDistance * 2, ground))
+        if (jumping)
+        {
+            jumping = false;
+            return false;
+        }
+        if (Physics.Raycast(transform.position + Vector3.up * snapDistance, Vector3.down, out groundHit, snapDistance * 2, ground))
         {
             if (Vector3.Distance(transform.position, groundHit.point) < snapDistance)
             {
                 transform.position = Vector3.Lerp(transform.position, groundHit.point + Vector3.up * snapDistance, 0.5f);
             }
-            //riding = Riding.NONE;
-            //acceleration.y = Mathf.Lerp(acceleration.y, 0.0f, 0.001f);
-
-            //friction
-            //if(acceleration.x > 2 && acceleration.x < 2) acceleration.x -= Mathf.Sign(acceleration.x) * groundFriction;
-            
-            velocity.y = Mathf.Lerp(velocity.y, 0, 0.1f);
+            velocity.y = Mathf.Lerp(velocity.y, 0, 0.2f);
             return true;
+        }
+        else
+        {
+            turboPower = Mathf.Lerp(turboPower, 0, 0.1f);
         }
         return false;
     }
@@ -192,7 +197,6 @@ public class AvatarControl : MonoBehaviour
 
     void Rotate()
     {
-
         targetRotation = Quaternion.Euler(0, balance, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.0125f);
     }
@@ -201,6 +205,29 @@ public class AvatarControl : MonoBehaviour
     {
         tony.SetPositionAndRotation(this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), this.transform.rotation);
         tony.RotateAround(shark.transform.position, shark.transform.up, 0.0f + -balance);
+    }
+
+    void Jump()
+    {
+        if (riding != Riding.NONE && Input.GetKeyDown("space"))
+        {
+            riding = Riding.NONE;
+            jumping = true;
+            acceleration.y += turboPower/10;
+            turboPower = 0;
+        }
+    }
+    void ApplyGravity()
+    {
+        if (transform.position.y < 0)
+        {
+            Vector3 desiredPosition = transform.position;
+            desiredPosition.y = 0.0f;
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.2f);
+            return;
+        }
+        acceleration.y += -3 * Time.deltaTime;
+
     }
 
 }
