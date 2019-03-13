@@ -43,9 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e92cdb34b5a4443a3f38d37d0fc101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePrefab: {fileID: 8416038811025487190, guid: 7bcbd7ef57f89ea42ab250f991d99753,
+  wavePrefab: {fileID: 8416038811025487190, guid: e23a9b0ce46c51c47bedc825b0e5bad3,
     type: 3}
   size: {x: 500, y: 0, z: 500}
   minimumDistanceToSpawn: 50
+  player: {fileID: 0}
   spawnDelay: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}

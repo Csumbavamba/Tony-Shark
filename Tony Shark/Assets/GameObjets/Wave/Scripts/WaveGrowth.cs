@@ -11,7 +11,7 @@ public class WaveGrowth : MonoBehaviour
 
     [SerializeField] float growthRate = 0.2f; // Think about making this into a scriptable Object
 
-    public bool StartedGrowing { get => startedGrowing; }
+    public bool StartedGrowing { get => startedGrowing; set => startedGrowing = value; }
     public bool StoppedGrowing { get => stoppedGrowing; }
 
     private void Awake()
