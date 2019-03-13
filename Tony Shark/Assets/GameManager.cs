@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     TrickManager trickManager;
 
     Spawner[] spawners;
+
+    public static float score = 0.0f;
     
     AvatarControl avatarScript;
     public TextMeshProUGUI speedText;
@@ -75,18 +77,23 @@ public class GameManager : MonoBehaviour
             // Add Game Logic here
         }
 
+        UpdateScore();
         SetUIText();
     }
 
     void SetUIText()
     {
-        string setText = "Speed: ";
+        string setText = "Speed, ";
         setText += ((int)avatarScript.velocity.z).ToString();
         speedText.SetText(setText);
 
-        setText = "Turbo Power: ";
+        setText = "Turbo, ";
         setText += ((int)avatarScript.turboPower).ToString();
         turboText.SetText(setText);
+
+        // For score calculation
+        string textToSet = "Score, " + score;
+        scoreText.SetText(textToSet);
     }
     public void StartTrick()
     {
@@ -101,6 +108,12 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Trick is ongoing, you don't want to start it again...");
         }
         
+    }
+
+    void UpdateScore()
+    {
+        score += avatarScript.velocity.magnitude * Time.deltaTime;
+        score = Mathf.Round(score * 10f) / 10f;
     }
 
 }
