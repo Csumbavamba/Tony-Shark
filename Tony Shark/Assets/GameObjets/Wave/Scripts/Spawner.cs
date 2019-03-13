@@ -8,8 +8,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject wavePrefab;
     [SerializeField] Vector3 size;
     [SerializeField] float minimumDistanceToSpawn = 50f;
+
     Vector3 positionFromplayer;
-    [SerializeField] GameObject player;
+    GameObject player;
 
     List<GameObject> spawnedWaves;
 
@@ -18,7 +19,7 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         spawnedWaves = new List<GameObject>();
-        // player = FindObjectOfType<AvatarControl>().gameObject;
+        player = FindObjectOfType<AvatarControl>().gameObject;
 
         CalculateDistanceFromPlayer();
     }

@@ -7,12 +7,14 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused = false;
     [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] GameObject slider;
     // Start is called before the first frame update
 
 
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        slider.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
         print("Resume");
@@ -21,6 +23,7 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
+        slider.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }

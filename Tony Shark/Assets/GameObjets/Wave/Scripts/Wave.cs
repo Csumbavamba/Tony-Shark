@@ -23,8 +23,8 @@ public class Wave : MonoBehaviour
         movementComponent.SetupMovementSettings(settings.MovementSettings);
 
         growthComponent = gameObject.AddComponent<WaveGrowth>();
-        
 
+        
         spawner = FindObjectOfType<Spawner>();
     }
 
@@ -62,7 +62,6 @@ public class Wave : MonoBehaviour
         {
             growthComponent.StopGrowing();
         }
-
         
     }
 }

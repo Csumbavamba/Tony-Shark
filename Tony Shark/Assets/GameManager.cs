@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     SceneLoader sceneLoader;
     PauseMenu pauseMenu;
     Spawner waveSpawner;
+    TrickManager trickManager;
 
     public void LoseGame()
     {
@@ -19,9 +20,17 @@ public class GameManager : MonoBehaviour
         sceneLoader = FindObjectOfType<SceneLoader>();
         pauseMenu = FindObjectOfType<PauseMenu>();
         waveSpawner = FindObjectOfType<Spawner>();
+        trickManager = FindObjectOfType<TrickManager>();
+
+        trickManager.gameObject.SetActive(false);
     }
 
     private void Start()
+    {
+        Invoke("StartSpawning", 2f);
+    }
+
+    public void StartSpawning()
     {
         waveSpawner.SpawnWaves();
     }
@@ -30,7 +39,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Pause Menu
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !trickManager.enabled)
         {
             if (PauseMenu.isPaused)
             {
@@ -45,7 +54,17 @@ public class GameManager : MonoBehaviour
         // Losing - TODO make it based on falling
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            LoseGame();
+            print("Space pressed."); // TODO FIX
+            if (trickManager.enabled)
+            {
+                trickManager.gameObject.SetActive(false);
+            }
+            else
+            {
+                trickManager.gameObject.SetActive(true);
+            }
+            
         }
+
     }
 }
