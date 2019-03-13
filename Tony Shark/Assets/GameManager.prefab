@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeToTrick: 3
+  speedText: {fileID: 0}
+  turboText: {fileID: 0}
+  scoreText: {fileID: 0}
