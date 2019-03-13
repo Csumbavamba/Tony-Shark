@@ -5,13 +5,10 @@ using UnityEngine;
 public class WaveMovement : MonoBehaviour
 {
     WaveMovementSettings movementSettings;
-
-    [SerializeField] float sideMovementSpeed = 5.0f; // MOVE TO SPAWNER
+    WaveAnimator animationScript;
 
     // Time based wave calculation
     float timeTravelled = 0.0f;
-    float crushingTime = 3.0f;
-
     float distanceRaised = 0.0f;
     float distanceLowered = 0.0f;
 
@@ -30,6 +27,12 @@ public class WaveMovement : MonoBehaviour
     {
         movementSettings = settings;
     }
+
+    private void Awake()
+    {
+        animationScript = GetComponent<WaveAnimator>();
+    }
+
     public void LaunchWave()
     {
         if (movementSettings)
@@ -50,17 +53,13 @@ public class WaveMovement : MonoBehaviour
         // Start raising the  wave up
         StopCoroutine(RaiseWaveUp());
         StartCoroutine(RaiseWaveUp());
-
-        // TODO Move Wave sideways
-        StopCoroutine(MoveSideways());
-        StartCoroutine(MoveSideways());
+       
 
         // While the wave did not travelled his maximum travel length
-        while (timeTravelled < movementSettings.TravelTime)
+        while (timeTravelled < movementSettings.TravelTime * 2)
         {
             // TIME CALCULATION
             timeTravelled += Time.deltaTime;
-            print(timeTravelled);
 
             // Calculate the new position
             Vector3 moveToPosition = -transform.right * movementSettings.TravelSpeed * Time.deltaTime;
@@ -69,7 +68,7 @@ public class WaveMovement : MonoBehaviour
             transform.Translate(moveToPosition);
 
             // If it's time for the wave to crush down
-            if (timeTravelled > movementSettings.TravelTime - crushingTime && !startedBringingDown)
+            if (timeTravelled > movementSettings.TravelTime && !startedBringingDown)
             {
                 // Only do this once
                 startedBringingDown = true;
@@ -79,75 +78,34 @@ public class WaveMovement : MonoBehaviour
                 StartCoroutine(BringWaveDown());
 
                 // TODO Start Wave-Crushing Animation
+                animationScript.PlayCrushAnimation();
             }
 
             yield return null;
         }
-
-        isStopped = true;
     }
-
-    //IEnumerator MoveForward()
-    //{
-    //    // Start raising the  wave up
-    //    StopCoroutine(RaiseWaveUp());
-    //    StartCoroutine(RaiseWaveUp());
-
-    //    // TODO Move Wave sideways
-    //    StopCoroutine(MoveSideways());
-    //    StartCoroutine(MoveSideways());
-
-    //    // While the wave did not travelled his maximum travel length
-    //    while (distanceTravelled < movementSettings.TravelDistance)
-    //    {
-    //        // TIME CALCULATION
-    //        movementSettings.TravelTime += Time.deltaTime;
-
-    //        distanceTravelled += movementSettings.TravelSpeed * Time.deltaTime;
-
-    //        // Calculate the new position
-    //        Vector3 moveToPosition = -transform.right * movementSettings.TravelSpeed * Time.deltaTime;
-
-    //        // Move the wave forward
-    //        transform.Translate(moveToPosition);
-
-    //        // If it's time for the wave to crush down
-    //        if (distanceTravelled > movementSettings.TravelDistance / 2 && !startedBringingDown)
-    //        {
-    //            // Only do this once
-    //            startedBringingDown = true;
-
-    //            // Bring Wave Down
-    //            StopCoroutine(BringWaveDown());
-    //            StartCoroutine(BringWaveDown());
-
-    //            // TODO Start Wave-Crushing Animation
-    //        }
-
-    //        yield return null;
-    //    }
-
-    //    isStopped = true;
-    //}
 
     IEnumerator BringWaveDown()
     {
         // The amount the Wave has to be raised
-        float distanceToBringDown = movementSettings.RaiseSpeed * transform.localScale.y * Time.deltaTime * crushingTime; // TODO Remake calculation
+        float distanceToBringDown = movementSettings.RaiseSpeed * transform.localScale.y * Time.deltaTime / 5.0f; 
         
         // Raise the wave out of the sea until it reaches it's maximum height
-        while (distanceLowered < (movementSettings.WaveRaiseHeight * transform.localScale.y))
+        while (distanceLowered < (movementSettings.WaveRaiseHeight * transform.localScale.y / 5.0f))
         {
+            print(movementSettings.WaveRaiseHeight * transform.localScale.y);
             distanceLowered += distanceToBringDown;
 
             // Calculate the new position
-            Vector3 lowerPosition = -Vector3.up * distanceToBringDown;
+            Vector3 lowerPosition = -transform.up * distanceToBringDown;
 
             // Move Wave up
             transform.Translate(lowerPosition);
 
             yield return null;
         }
+
+        isStopped = true;
     }
 
     IEnumerator RaiseWaveUp()
@@ -170,22 +128,24 @@ public class WaveMovement : MonoBehaviour
         }
 
         reachedMaxHeight = true;
+        animationScript.PlayTravelAnimation();
+
         print("Max height reached");
     }
 
-    IEnumerator MoveSideways()
-    {
-        while(true)
-        {
-            // Start moving the wave sideway
-            Vector3 sideMovementPosition = transform.forward * sideMovementSpeed * Time.deltaTime; // TODO make this decided by the spawner
+    //IEnumerator MoveSideways()
+    //{
+    //    while(true)
+    //    {
+    //        // Start moving the wave sideway
+    //        Vector3 sideMovementPosition = transform.forward * sideMovementSpeed * Time.deltaTime; // TODO make this decided by the spawner
 
-            // Move the way sideways
-            transform.Translate(sideMovementPosition);
+    //        // Move the way sideways
+    //        transform.Translate(sideMovementPosition);
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
         
         
-    }
+    //}
 }

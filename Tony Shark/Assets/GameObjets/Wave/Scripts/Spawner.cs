@@ -5,21 +5,28 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] float sideMovementSpeed = 5.0f;
     [SerializeField] GameObject wavePrefab;
     [SerializeField] Vector3 size;
     [SerializeField] float minimumDistanceToSpawn = 50f;
+    Vector3 positionFromplayer;
+    [SerializeField] GameObject player;
 
     List<GameObject> spawnedWaves;
 
-    public float SideMovementSpeed { get => sideMovementSpeed; set => sideMovementSpeed = value; }
     public List<GameObject> SpawnedWaves { get => spawnedWaves; }
 
     private void Awake()
     {
         spawnedWaves = new List<GameObject>();
+        // player = FindObjectOfType<AvatarControl>().gameObject;
+
+        CalculateDistanceFromPlayer();
     }
 
+    private void CalculateDistanceFromPlayer()
+    {
+        positionFromplayer = transform.position - player.transform.position;
+    }
 
     public void SpawnWaves()
     {
@@ -29,11 +36,16 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StopCoroutine(SpawnWavesContinuously());
-            StartCoroutine(SpawnWavesContinuously());
-        }
+        MoveAlongPlayer();
+    }
+
+    public void MoveAlongPlayer()
+    {
+        // Keep a constant distance
+        Vector3 movedPosition = player.transform.position + positionFromplayer;
+        movedPosition.y = -3f;
+
+        transform.position = movedPosition;
     }
 
     Vector3 GetRandomSpawnPosition()
@@ -89,6 +101,7 @@ public class Spawner : MonoBehaviour
                 // Instantiate the Wave and add to the List of Waves
                 GameObject spawnedWave = Instantiate(wavePrefab, spawnPosition, Quaternion.identity);
                 spawnedWaves.Add(spawnedWave);
+                yield return new WaitForSeconds(1f);
             } 
         } 
     }

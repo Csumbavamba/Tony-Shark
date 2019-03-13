@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     SceneLoader sceneLoader;
     PauseMenu pauseMenu;
+    Spawner waveSpawner;
 
     public void LoseGame()
     {
@@ -17,6 +18,12 @@ public class GameManager : MonoBehaviour
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
         pauseMenu = FindObjectOfType<PauseMenu>();
+        waveSpawner = FindObjectOfType<Spawner>();
+    }
+
+    private void Start()
+    {
+        waveSpawner.SpawnWaves();
     }
 
     // Update is called once per frame
@@ -35,7 +42,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Losing
+        // Losing - TODO make it based on falling
         if (Input.GetKeyDown(KeyCode.Space))
         {
             LoseGame();
