@@ -37,10 +37,8 @@ public class TrickManager : MonoBehaviour
     [SerializeField] GameObject mistakeImage;
     [SerializeField] float mistakeDisplaySpeed = 4.0f;
 
-    [SerializeField] AudioClip timeSlowDown;
-    [SerializeField] AudioClip timeToNormal;
-    [SerializeField] AudioClip success;
-    [SerializeField] AudioClip failure;
+
+    [SerializeField] UISounds uiSounds;
 
     float maxTimeToTrick = 5.0f;
     Slider timeLeftSlider;
@@ -51,19 +49,20 @@ public class TrickManager : MonoBehaviour
     bool readyToSpawn = false;
     Color mistakeColor;
     bool isTrickFailed = false;
-    AudioSource audioSource;
+
+    bool wasTrickSuccessful = false;
 
 
     public bool IsTrickFailed { get => isTrickFailed; }
     public float MaxTimeToTrick { get => maxTimeToTrick; set => maxTimeToTrick = value; }
     public bool ReadyToSpawn { get => readyToSpawn; set => readyToSpawn = value; }
+    public bool WasTrickSuccessful { get => wasTrickSuccessful; }
 
     // Start is called before the first frame update
     void Awake()
     {
         // buttons = new TrickButton[4];
         buttons = GetComponentsInChildren<TrickButton>();
-        audioSource = GetComponent<AudioSource>();
 
         timeLeftToTrick = maxTimeToTrick;
 
@@ -99,9 +98,9 @@ public class TrickManager : MonoBehaviour
     void SlowDownTime()
     {
         // Play the sound if it's not playing
-        if (!audioSource.isPlaying)
+        if (!uiSounds.IsPlayingSound())
         {
-            audioSource.PlayOneShot(timeSlowDown, 1.0f);
+            uiSounds.PlaySound(uiSounds.TimeSlowDown, 1.0f);
         }
 
         StopCoroutine(SlowTimeGradually());
@@ -154,15 +153,17 @@ public class TrickManager : MonoBehaviour
         if (timeLeftToTrick < 0.0f || isTrickFailed)
         {
             // Run Failed Animation - TODO add from Player
-            audioSource.PlayOneShot(failure, 1.0f);
+            wasTrickSuccessful = false;
+            uiSounds.PlaySound(uiSounds.Failure, 1.0f);
             StopCoroutine(PlayUIDamageOverlay());
             StartCoroutine(PlayUIDamageOverlay());
         }
         else
         {
             // Run success Animation - TODO add from Player
+            wasTrickSuccessful = true;
             EnableParticles();
-            audioSource.PlayOneShot(success, 1.0f);
+            uiSounds.PlaySound(uiSounds.Success, 1.0f);
             Invoke("DisableParticles", .5f);
         }
     }
@@ -170,8 +171,8 @@ public class TrickManager : MonoBehaviour
     void ScaleTimeBack()
     {
         // Play the sound if it's not playing
-        audioSource.Stop();
-        audioSource.PlayOneShot(timeToNormal, 1.0f);
+        uiSounds.StopPlayingSound();
+        uiSounds.PlaySound(uiSounds.TimeToNormal, 1.0f);
 
         StopCoroutine(SetTimeBackToNormal());
         StartCoroutine(SetTimeBackToNormal());
@@ -223,6 +224,9 @@ public class TrickManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
+
+        // Disable the trick manager
+        gameObject.SetActive(false);
     }
 
     ButtonSettings GenerateRandomButtonSettings()

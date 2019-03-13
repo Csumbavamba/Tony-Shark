@@ -14,10 +14,7 @@ public class GameManager : MonoBehaviour
     Spawner[] spawners;
     
 
-    public void LoseGame()
-    {
-        sceneLoader.LoadLoseScene();
-    }
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -45,7 +42,6 @@ public class GameManager : MonoBehaviour
         {
             spawner.SpawnWaves();
         }
-        // waveSpawner.SpawnWaves();
     }
 
     // Update is called once per frame
@@ -66,24 +62,33 @@ public class GameManager : MonoBehaviour
 
         if (!PauseMenu.isPaused)
         {
-            // TODO - remove after testing
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // If It is active, enable it
-                if (trickManager.gameObject.activeSelf)
-                {
-                    trickManager.gameObject.SetActive(false);
-                }
-                else
-                {
-                    trickManager.gameObject.SetActive(true);
-                    trickManager.TryToDoTrick();
-                }
-
-            }
+            // Add Game Logic here
         }
 
         
 
+    }
+
+    public void LoseGame()
+    {
+        // Play Lose things here
+
+        // Last call here...
+        sceneLoader.LoadLoseScene();
+    }
+
+    public void StartTrick()
+    {
+        // Make sure to not start it while it's going
+        if (!trickManager.gameObject.activeSelf)
+        {
+            trickManager.gameObject.SetActive(true);
+            trickManager.TryToDoTrick();
+        }
+        else
+        {
+            Debug.LogError("Trick is ongoing, you don't want to start it again...");
+        }
+        
     }
 }

@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c4eab2613d55445abc7fb69d9abbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTimeToTrick: 3

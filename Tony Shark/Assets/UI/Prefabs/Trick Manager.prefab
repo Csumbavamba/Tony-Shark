@@ -5536,10 +5536,7 @@ MonoBehaviour:
   successParticles: {fileID: 382324252}
   mistakeImage: {fileID: 1542641224}
   mistakeDisplaySpeed: 4
-  timeSlowDown: {fileID: 8300000, guid: 98fada7983a73574ab640385f46f55f3, type: 3}
-  timeToNormal: {fileID: 8300000, guid: e6944f2d2e3e90c449cfcd5aed6131ae, type: 3}
-  success: {fileID: 8300000, guid: 0bc67a88c752de34e84f3ae2deb13be5, type: 3}
-  failure: {fileID: 8300000, guid: 0991d23142d9740449ade4d88d527619, type: 3}
+  uiSounds: {fileID: 0}
 --- !u!82 &5524979444675198642
 AudioSource:
   m_ObjectHideFlags: 0
