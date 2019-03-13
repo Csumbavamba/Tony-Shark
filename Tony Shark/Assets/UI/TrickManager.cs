@@ -164,6 +164,8 @@ public class TrickManager : MonoBehaviour
             wasTrickSuccessful = true;
             EnableParticles();
             uiSounds.PlaySound(uiSounds.Success, 1.0f);
+            // Add Score
+            GameManager.score += 500;
             Invoke("DisableParticles", .5f);
         }
     }

@@ -603,6 +603,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8653245170657420354, guid: c927eb09a35853b4b9654d0dd0b74fd7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653245170657420354, guid: c927eb09a35853b4b9654d0dd0b74fd7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653245169910830402, guid: c927eb09a35853b4b9654d0dd0b74fd7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653245169910830402, guid: c927eb09a35853b4b9654d0dd0b74fd7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653245170079815769, guid: c927eb09a35853b4b9654d0dd0b74fd7,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8653245170079815769, guid: c927eb09a35853b4b9654d0dd0b74fd7,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1644825590228627591, guid: c927eb09a35853b4b9654d0dd0b74fd7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -732,36 +762,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8653245170079815769, guid: c927eb09a35853b4b9654d0dd0b74fd7,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8653245170079815769, guid: c927eb09a35853b4b9654d0dd0b74fd7,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8653245169910830402, guid: c927eb09a35853b4b9654d0dd0b74fd7,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8653245169910830402, guid: c927eb09a35853b4b9654d0dd0b74fd7,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8653245170657420354, guid: c927eb09a35853b4b9654d0dd0b74fd7,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8653245170657420354, guid: c927eb09a35853b4b9654d0dd0b74fd7,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c927eb09a35853b4b9654d0dd0b74fd7, type: 3}
