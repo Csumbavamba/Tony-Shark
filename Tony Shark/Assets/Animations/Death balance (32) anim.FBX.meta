@@ -1,0 +1,291 @@
+fileFormatVersion: 2
+guid: b119a8d5c808bd145812cdf915a8ae7e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Allosaur
+    100002: AllosaurHead
+    100004: AllosaurHeadBone0
+    100006: AllosaurNeck1
+    100008: AllosaurNeck2
+    100010: AllosaurNeck3
+    100012: AllosaurNeck4
+    100014: AllosaurNeck5
+    100016: AllosaurNeck6
+    100018: AllosaurNeck7
+    100020: AllosaurPelvis
+    100022: AllosaurRibcage
+    100024: AllosaurSpine1
+    100026: AllosaurSpine2
+    100028: AllosaurSpine3
+    100030: AllosaurSpine4
+    100032: AllosaurSpine5
+    100034: AllosaurSpine6
+    100036: AllosaurSpine7
+    100038: AllosaurTail01
+    100040: AllosaurTail02
+    100042: AllosaurTail03
+    100044: AllosaurTail04
+    100046: AllosaurTail05
+    100048: AllosaurTail06
+    100050: AllosaurTail07
+    100052: AllosaurTail08
+    100054: AllosaurTail09
+    100056: AllosaurTail10
+    100058: AllosaurTail11
+    100060: AllosaurTail12
+    100062: AllosaurTail13
+    100064: AllosaurTail14
+    100066: Base Human
+    100068: Base HumanHead
+    100070: Base HumanLCalf
+    100072: Base HumanLCollarbone
+    100074: Base HumanLDigit11
+    100076: Base HumanLDigit11 1
+    100078: Base HumanLDigit12
+    100080: Base HumanLDigit12 1
+    100082: Base HumanLDigit13
+    100084: Base HumanLDigit21
+    100086: Base HumanLDigit22
+    100088: Base HumanLDigit23
+    100090: Base HumanLDigit31
+    100092: Base HumanLDigit32
+    100094: Base HumanLDigit33
+    100096: Base HumanLDigit41
+    100098: Base HumanLDigit42
+    100100: Base HumanLDigit43
+    100102: Base HumanLDigit51
+    100104: Base HumanLDigit52
+    100106: Base HumanLDigit53
+    100108: Base HumanLFoot
+    100110: Base HumanLForearm
+    100112: Base HumanLPalm
+    100114: Base HumanLPlatform
+    100116: Base HumanLThigh
+    100118: Base HumanLUpperarm
+    100120: Base HumanNeck1
+    100122: Base HumanNeck2
+    100124: Base HumanPelvis
+    100126: Base HumanRCalf
+    100128: Base HumanRCollarbone
+    100130: Base HumanRDigit11
+    100132: Base HumanRDigit11 1
+    100134: Base HumanRDigit12
+    100136: Base HumanRDigit12 1
+    100138: Base HumanRDigit13
+    100140: Base HumanRDigit21
+    100142: Base HumanRDigit22
+    100144: Base HumanRDigit23
+    100146: Base HumanRDigit31
+    100148: Base HumanRDigit32
+    100150: Base HumanRDigit33
+    100152: Base HumanRDigit41
+    100154: Base HumanRDigit42
+    100156: Base HumanRDigit43
+    100158: Base HumanRDigit51
+    100160: Base HumanRDigit52
+    100162: Base HumanRDigit53
+    100164: Base HumanRFoot
+    100166: Base HumanRForearm
+    100168: Base HumanRibcage
+    100170: Base HumanRPalm
+    100172: Base HumanRPlatform
+    100174: Base HumanRThigh
+    100176: Base HumanRUpperarm
+    100178: Base HumanSpine1
+    100180: Base HumanSpine2
+    100182: Base HumanSpine3
+    100184: Base HumanSpine4
+    100186: //RootNode
+    100188: Shark
+    100190: SurferDude
+    400000: Allosaur
+    400002: AllosaurHead
+    400004: AllosaurHeadBone0
+    400006: AllosaurNeck1
+    400008: AllosaurNeck2
+    400010: AllosaurNeck3
+    400012: AllosaurNeck4
+    400014: AllosaurNeck5
+    400016: AllosaurNeck6
+    400018: AllosaurNeck7
+    400020: AllosaurPelvis
+    400022: AllosaurRibcage
+    400024: AllosaurSpine1
+    400026: AllosaurSpine2
+    400028: AllosaurSpine3
+    400030: AllosaurSpine4
+    400032: AllosaurSpine5
+    400034: AllosaurSpine6
+    400036: AllosaurSpine7
+    400038: AllosaurTail01
+    400040: AllosaurTail02
+    400042: AllosaurTail03
+    400044: AllosaurTail04
+    400046: AllosaurTail05
+    400048: AllosaurTail06
+    400050: AllosaurTail07
+    400052: AllosaurTail08
+    400054: AllosaurTail09
+    400056: AllosaurTail10
+    400058: AllosaurTail11
+    400060: AllosaurTail12
+    400062: AllosaurTail13
+    400064: AllosaurTail14
+    400066: Base Human
+    400068: Base HumanHead
+    400070: Base HumanLCalf
+    400072: Base HumanLCollarbone
+    400074: Base HumanLDigit11
+    400076: Base HumanLDigit11 1
+    400078: Base HumanLDigit12
+    400080: Base HumanLDigit12 1
+    400082: Base HumanLDigit13
+    400084: Base HumanLDigit21
+    400086: Base HumanLDigit22
+    400088: Base HumanLDigit23
+    400090: Base HumanLDigit31
+    400092: Base HumanLDigit32
+    400094: Base HumanLDigit33
+    400096: Base HumanLDigit41
+    400098: Base HumanLDigit42
+    400100: Base HumanLDigit43
+    400102: Base HumanLDigit51
+    400104: Base HumanLDigit52
+    400106: Base HumanLDigit53
+    400108: Base HumanLFoot
+    400110: Base HumanLForearm
+    400112: Base HumanLPalm
+    400114: Base HumanLPlatform
+    400116: Base HumanLThigh
+    400118: Base HumanLUpperarm
+    400120: Base HumanNeck1
+    400122: Base HumanNeck2
+    400124: Base HumanPelvis
+    400126: Base HumanRCalf
+    400128: Base HumanRCollarbone
+    400130: Base HumanRDigit11
+    400132: Base HumanRDigit11 1
+    400134: Base HumanRDigit12
+    400136: Base HumanRDigit12 1
+    400138: Base HumanRDigit13
+    400140: Base HumanRDigit21
+    400142: Base HumanRDigit22
+    400144: Base HumanRDigit23
+    400146: Base HumanRDigit31
+    400148: Base HumanRDigit32
+    400150: Base HumanRDigit33
+    400152: Base HumanRDigit41
+    400154: Base HumanRDigit42
+    400156: Base HumanRDigit43
+    400158: Base HumanRDigit51
+    400160: Base HumanRDigit52
+    400162: Base HumanRDigit53
+    400164: Base HumanRFoot
+    400166: Base HumanRForearm
+    400168: Base HumanRibcage
+    400170: Base HumanRPalm
+    400172: Base HumanRPlatform
+    400174: Base HumanRThigh
+    400176: Base HumanRUpperarm
+    400178: Base HumanSpine1
+    400180: Base HumanSpine2
+    400182: Base HumanSpine3
+    400184: Base HumanSpine4
+    400186: //RootNode
+    400188: Shark
+    400190: SurferDude
+    2100000: initialShadingGroup
+    2100002: lambert1
+    4300000: Shark
+    4300002: SurferDude
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Shark
+    13700002: SurferDude
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
