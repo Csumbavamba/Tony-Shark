@@ -54,7 +54,8 @@ public class Wave : MonoBehaviour
         // Start Growing once Max Height is reached
         if (movementComponent.ReachedMaxHeight && !growthComponent.StartedGrowing)
         {
-            growthComponent.StartGrowing();
+            growthComponent.StartedGrowing = true;
+            // growthComponent.StartGrowing();
             // TODO Start Wave-Travelling Animation
         }
 
