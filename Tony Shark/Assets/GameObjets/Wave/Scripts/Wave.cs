@@ -7,7 +7,7 @@ public class Wave : MonoBehaviour
 {
     WaveMovement movementComponent;
     WaveGrowth growthComponent;
-    WaveAnimator animatorComponent;
+    //WaveAnimator animatorComponent;
     Spawner spawner;
     
 
@@ -18,7 +18,7 @@ public class Wave : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        animatorComponent = gameObject.AddComponent<WaveAnimator>();
+        //animatorComponent = gameObject.AddComponent<WaveAnimator>();
         movementComponent = gameObject.AddComponent<WaveMovement>();
         movementComponent.SetupMovementSettings(settings.MovementSettings);
 
@@ -55,7 +55,7 @@ public class Wave : MonoBehaviour
         if (movementComponent.ReachedMaxHeight && !growthComponent.StartedGrowing)
         {
             growthComponent.StartedGrowing = true;
-            // growthComponent.StartGrowing();
+             growthComponent.StartGrowing();
             // TODO Start Wave-Travelling Animation
         }
 

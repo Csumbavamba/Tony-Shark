@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     SceneLoader sceneLoader;
     PauseMenu pauseMenu;
     Spawner waveSpawner;
+
+    public GameObject avatar;
+    AvatarControl avatarScript;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI turboText;
+    public TextMeshProUGUI scoreText;
 
     public void LoseGame()
     {
@@ -23,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        avatarScript = avatar.GetComponent<AvatarControl>();
         Invoke("SpawnWaves", 2f); 
     }
 
@@ -52,5 +61,18 @@ public class GameManager : MonoBehaviour
         {
             LoseGame();
         }
+
+        SetUIText();
+    }
+
+    void SetUIText()
+    {
+        string setText = "Speed: ";
+        setText += ((int)avatarScript.velocity.z).ToString();
+        speedText.SetText(setText);
+
+        setText = "Turbo Power: ";
+        setText += ((int)avatarScript.turboPower).ToString();
+        turboText.SetText(setText);
     }
 }

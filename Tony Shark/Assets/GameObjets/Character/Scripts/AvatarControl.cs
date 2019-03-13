@@ -21,13 +21,12 @@ public class AvatarControl : MonoBehaviour
     //-----For Movement
     Vector3 maxVelocity;
     Vector3 minVelocity;
-    Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
     Vector3 acceleration = Vector3.zero;
     public Vector3 moveSpeed = new Vector3(10.0f, 10.0f, 10.0f);
     public float groundFriction = 1.0f;
-
-
-
+    public float turboPower = 0.0f;
+    
     //-----For Balance
     public RawImage balanceNeedle;
     float balance = 0.0f;
@@ -52,7 +51,6 @@ public class AvatarControl : MonoBehaviour
         NONE
     }
 
-
     private void Start()
     {
         cc = GetComponent<CharacterController>();
@@ -64,7 +62,7 @@ public class AvatarControl : MonoBehaviour
 
         //-----For Movement
         maxVelocity.y = moveSpeed.y * 5;
-        maxVelocity.x = moveSpeed.x * 3;
+        maxVelocity.x = moveSpeed.x * 5;
         
 
         minVelocity.z = moveSpeed.z;
@@ -97,23 +95,29 @@ public class AvatarControl : MonoBehaviour
         if (!OnGround())
         {
             //If we're not on the ground, be affected by gravity
-            acceleration.y += -2 * Time.deltaTime;
+            acceleration.y += -1 * Time.deltaTime;
             print(acceleration.y);
-            MoveHorizontal(0.5f);
+            MoveHorizontal(0.5f + turboPower);
         }
         else
         {
             acceleration.y = Mathf.Lerp(acceleration.y, 0, 0.1f);
             OnWave();
-            MoveHorizontal(1f);
-            if (riding != Riding.NONE) velocity.z += moveSpeed.z * 0.5f;
+            MoveHorizontal(1 + turboPower);
+
+            if (riding != Riding.NONE)
+            {
+                turboPower += 1.0f * Time.deltaTime;
+                velocity.z += turboPower / 10;
+            }
             if (Mathf.Abs(velocity.z) > minVelocity.z)
             {
-                velocity.z = Mathf.Lerp(velocity.z, minVelocity.z * Mathf.Sign(velocity.z), 0.125f);
+                velocity.z = Mathf.Lerp(velocity.z, minVelocity.z * Mathf.Sign(velocity.z), 0.01f);
+            
             }
             else velocity.z = minVelocity.z;
 
-            if (Mathf.Abs(velocity.x) > maxVelocity.x) Mathf.Lerp(velocity.x, maxVelocity.x * Mathf.Sign(velocity.x), 1f);
+            if (Mathf.Abs(velocity.x) > maxVelocity.x) Mathf.Lerp(velocity.x, maxVelocity.x * Mathf.Sign(velocity.x), 0.1f);
         }
 
 
@@ -123,15 +127,10 @@ public class AvatarControl : MonoBehaviour
 
     void MoveHorizontal(float multiplier)
     {
-        //Side to Side using velocity
-        if(Mathf.Abs(velocity.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance) * multiplier) < maxVelocity.x) velocity.x += moveSpeed.x * turnSpeed * Mathf.Sign(balance) * multiplier;
-
-        ////Side to Side using acceleration
-        //if (Mathf.Abs(acceleration.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance)) < maxVelocity.x)
-        //{
-        //    acceleration.x = moveSpeed.x * turnSpeed * Mathf.Sign(balance);
-        //}
-        //else acceleration.x = Mathf.Sign(acceleration.x) * maxVelocity.x;
+        if (Mathf.Abs(velocity.x + moveSpeed.x * turnSpeed * Mathf.Sign(balance) * multiplier) < maxVelocity.x)
+        {
+            velocity.x += moveSpeed.x * turnSpeed * Mathf.Sign(balance) * multiplier;
+        }
     }
 
     bool OnWave()
@@ -145,13 +144,18 @@ public class AvatarControl : MonoBehaviour
             riding = Riding.NONE;
             return false;
         }
+        else
+        {
+            riding = Riding.NONE;
+            turboPower = Mathf.Lerp(turboPower, 0, 0.2f);
+        }
         return false;
 
     }
 
     bool OnGround()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, snapDistance + 0.5f, ground))
+        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, snapDistance * 2, ground))
         {
             if (Vector3.Distance(transform.position, groundHit.point) < snapDistance)
             {
@@ -163,7 +167,7 @@ public class AvatarControl : MonoBehaviour
             //friction
             //if(acceleration.x > 2 && acceleration.x < 2) acceleration.x -= Mathf.Sign(acceleration.x) * groundFriction;
             
-            velocity.y = 0.0f;
+            velocity.y = Mathf.Lerp(velocity.y, 0, 0.1f);
             return true;
         }
         return false;

@@ -44,7 +44,7 @@ public class Spawner : MonoBehaviour
     {
         // Keep a constant distance
         Vector3 movedPosition = player.transform.position + positionFromplayer;
-        movedPosition.y = -3f;
+        movedPosition.y = transform.position.y;
 
         transform.position = movedPosition;
     }
@@ -100,7 +100,7 @@ public class Spawner : MonoBehaviour
             else
             {
                 // Instantiate the Wave and add to the List of Waves
-                GameObject spawnedWave = Instantiate(wavePrefab, spawnPosition, Quaternion.identity);
+                GameObject spawnedWave = Instantiate(wavePrefab, spawnPosition, Quaternion.Euler(new Vector3(0.0f, -90.0f, 0.0f)));
                 spawnedWaves.Add(spawnedWave);
                 yield return new WaitForSeconds(1f);
             } 

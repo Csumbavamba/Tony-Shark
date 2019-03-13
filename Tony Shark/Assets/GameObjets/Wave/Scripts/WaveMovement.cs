@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveMovement : MonoBehaviour
 {
     WaveMovementSettings movementSettings;
-    WaveAnimator animationScript;
+    //WaveAnimator animationScript;
 
     // Time based wave calculation
     float timeTravelled = 0.0f;
@@ -30,7 +30,7 @@ public class WaveMovement : MonoBehaviour
 
     private void Awake()
     {
-        animationScript = GetComponent<WaveAnimator>();
+       // animationScript = GetComponent<WaveAnimator>();
     }
 
     public void LaunchWave()
@@ -62,7 +62,7 @@ public class WaveMovement : MonoBehaviour
             timeTravelled += Time.deltaTime;
 
             // Calculate the new position
-            Vector3 moveToPosition = -transform.right * movementSettings.TravelSpeed * Time.deltaTime;
+            Vector3 moveToPosition = transform.right * movementSettings.TravelSpeed * Time.deltaTime;
 
             // Move the wave forward
             transform.Translate(moveToPosition);
@@ -78,7 +78,7 @@ public class WaveMovement : MonoBehaviour
                 StartCoroutine(BringWaveDown());
 
                 // TODO Start Wave-Crushing Animation
-                animationScript.PlayCrushAnimation();
+               // animationScript.PlayCrushAnimation();
             }
 
             yield return null;
@@ -88,12 +88,12 @@ public class WaveMovement : MonoBehaviour
     IEnumerator BringWaveDown()
     {
         // The amount the Wave has to be raised
-        float distanceToBringDown = movementSettings.RaiseSpeed * transform.localScale.y * Time.deltaTime / 5.0f; 
+        float distanceToBringDown = movementSettings.RaiseSpeed * transform.localScale.y * Time.deltaTime * 4f; 
         
         // Raise the wave out of the sea until it reaches it's maximum height
-        while (distanceLowered < (movementSettings.WaveRaiseHeight * transform.localScale.y / 5.0f))
+        while (distanceLowered < (movementSettings.WaveRaiseHeight * 1.5f))
         {
-            print(movementSettings.WaveRaiseHeight * transform.localScale.y);
+            //print(movementSettings.WaveRaiseHeight * transform.localScale.y);
             distanceLowered += distanceToBringDown;
 
             // Calculate the new position
@@ -128,7 +128,7 @@ public class WaveMovement : MonoBehaviour
         }
 
         reachedMaxHeight = true;
-        animationScript.PlayTravelAnimation();
+        //animationScript.PlayTravelAnimation();
 
         print("Max height reached");
     }
