@@ -5660,11 +5660,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 873837356627465592, guid: 882d1311e5917d143b2eb08fcd18e74d,
-        type: 3}
-      propertyPath: m_TagString
-      value: WaveSpawner
-      objectReference: {fileID: 0}
     - target: {fileID: 873837356627465594, guid: 882d1311e5917d143b2eb08fcd18e74d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5719,16 +5714,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 873837356627465593, guid: 882d1311e5917d143b2eb08fcd18e74d,
-        type: 3}
-      propertyPath: size.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 873837356627465593, guid: 882d1311e5917d143b2eb08fcd18e74d,
-        type: 3}
-      propertyPath: size.z
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 882d1311e5917d143b2eb08fcd18e74d, type: 3}
@@ -5864,7 +5849,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1525248007}
   - component: {fileID: 1525248006}
-  - component: {fileID: 1525248005}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5872,14 +5856,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1525248005
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525248004}
-  m_Enabled: 1
 --- !u!20 &1525248006
 Camera:
   m_ObjectHideFlags: 0
@@ -6193,11 +6169,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeagullSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 5568954246920107193, guid: 1500a6b3834477146b7c7e47f2e0f61d,
-        type: 3}
-      propertyPath: m_TagString
-      value: SeagullSpawner
-      objectReference: {fileID: 0}
     - target: {fileID: 5568954246920107195, guid: 1500a6b3834477146b7c7e47f2e0f61d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6252,11 +6223,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5568954246920107192, guid: 1500a6b3834477146b7c7e47f2e0f61d,
-        type: 3}
-      propertyPath: size.x
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1500a6b3834477146b7c7e47f2e0f61d, type: 3}
